@@ -1,0 +1,31 @@
+{
+  "name": "node.js-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon api/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daikiri-San/Node.JS-2.git"
+  },
+  "keywords": [],
+  "author": "Nikita Holovnin <Golovninnikita@ukr.net>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Daikiri-San/Node.JS-2/issues"
+  },
+  "homepage": "https://github.com/Daikiri-San/Node.JS-2#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.7",
+    "morgan": "^1.10.0"
+  }
+}
