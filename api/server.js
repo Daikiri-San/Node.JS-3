@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const mongoose = require("mongoose");
 const { contactsRouter } = require("./contacts/contacts.router");
 
 const PORT = 3000;
@@ -11,11 +12,12 @@ class Server {
     this.server = null;
   }
 
-  start() {
+  async start() {
     this.initServer();
     this.initMiddleware();
     this.initRoutes();
     this.handleErrors();
+    await this.initDatabase();
     this.startListening();
   }
 
@@ -37,15 +39,22 @@ class Server {
     this.server.use((err, req, res, next) => {
       delete err.stack;
 
-      return res.status(err.status).send(`${err.name}: ${err.message}`);
+      return res.status(err.status || 500).send(`${err.name}: ${err.message}`);
     });
   }
 
-  initDatabase() {}
+  async initDatabase() {
+    try {
+      await mongoose.connect(process.env.MONGODB_DB_URL);
+    } catch (err) {
+      console.log("MongoDB connection error", err);
+      process.exit(1);
+    }
+  }
 
   startListening() {
     this.server.listen(PORT, () =>
-      console.log("Server started listening on port:", PORT)
+      console.log("Database connection successful")
     );
   }
 }

@@ -1,11 +1,9 @@
-const fs = require("fs");
-
-const { ContactsModel } = require("./contacts.model");
+const { ContactModel } = require("./contacts.model");
 
 class ContactsController {
   async listContacts(req, res, next) {
     try {
-      const contacts = await ContactsModel.findAllContact();
+      const contacts = await ContactModel.findAllContacts();
 
       return res.status(200).send(contacts);
     } catch (err) {
@@ -17,7 +15,7 @@ class ContactsController {
     try {
       const { contactId } = req.params;
 
-      const searchedUser = await ContactsModel.findContactById(contactId);
+      const searchedUser = await ContactModel.findContactById(contactId);
       if (!searchedUser) return res.status(404).send({ message: "Not found" });
       return res.status(200).send(searchedUser);
     } catch (err) {
@@ -27,7 +25,7 @@ class ContactsController {
 
   async addContact(req, res, next) {
     try {
-      const newContact = await ContactsModel.createContact(req.body);
+      const newContact = await ContactModel.createContact(req.body);
 
       return res.status(201).send(newContact);
     } catch (err) {
@@ -53,10 +51,10 @@ class ContactsController {
     const { contactId } = req.params;
 
     try {
-      const searchedUser = await ContactsModel.findContactById(contactId);
+      const searchedUser = await ContactModel.findContactById(contactId);
       if (!searchedUser) return res.status(404).send({ message: "Not found" });
 
-      await ContactsModel.deleteContactById(contactId);
+      await ContactModel.deleteContactById(contactId);
 
       return res.status(200).send({ message: "contact deleted" });
     } catch (err) {
@@ -73,14 +71,14 @@ class ContactsController {
     const { contactId } = req.params;
 
     try {
-      const searchedUser = await ContactsModel.findContactById(contactId);
+      const searchedUser = await ContactModel.findContactById(contactId);
       if (!searchedUser) return res.status(404).send({ message: "Not found" });
-      const updatedContact = await ContactsModel.updateContactById(
+      const updatedContact = await ContactModel.updateContactById(
         contactId,
         req.body
       );
 
-      return res.status(200).send(updatedContact.value);
+      return res.status(200).send(updatedContact);
     } catch (err) {
       next(err);
     }
