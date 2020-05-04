@@ -3,12 +3,7 @@ const { Seeder } = require("mongo-seeding");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const config = {
-  database: {
-    host: process.env.MY_HOST,
-    name: process.env.MONGODB_DB_NAME,
-    username: process.env.USER_NAME,
-    password: process.env.PASSWORD,
-  },
+  database: process.env.MONGODB_DB_ADMIN,
   dropDatabase: true,
 };
 const seeder = new Seeder(config);
