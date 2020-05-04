@@ -5,7 +5,7 @@ require("dotenv").config({ path: path.join(__dirname, ".env") });
 const config = {
   database: {
     host: process.env.MY_HOST,
-    name: process.env.MONGODB_DB_URL,
+    name: process.env.MONGODB_DB_NAME,
     username: process.env.USER_NAME,
     password: process.env.PASSWORD,
   },
