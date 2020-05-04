@@ -12,10 +12,6 @@ const collections = seeder.readCollectionsFromPath(path.resolve("./api/db"), {
   transformers: [Seeder.Transformers.replaceDocumentIdWithUnderscoreId],
 });
 
-console.log("config", config);
-console.log("seeder", seeder);
-console.log("collections", collections);
-
 seeder
   .import(collections)
   .then(() => {
