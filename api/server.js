@@ -14,10 +14,10 @@ class Server {
 
   async start() {
     this.initServer();
+    await this.initDatabase();
     this.initMiddleware();
     this.initRoutes();
     this.handleErrors();
-    await this.initDatabase();
     this.startListening();
   }
 

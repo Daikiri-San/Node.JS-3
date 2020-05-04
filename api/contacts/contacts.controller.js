@@ -65,7 +65,10 @@ class ContactsController {
   async updateContact(req, res, next) {
     const { name, email, phone } = req.body;
     if (!name && !email && !phone) {
-      return res.status(400).send({ message: "missing fields" });
+      return res.status(400).send({
+        message:
+          "missing fields. You need any of name/email/phone to update contact",
+      });
     }
 
     const { contactId } = req.params;
